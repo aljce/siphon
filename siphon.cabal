@@ -15,17 +15,27 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   ghc-options:         -Wall
-  exposed-modules:     Lib
+  exposed-modules:     Siphon.Types
+                     , Siphon.Parser
+                     , Siphon.Test
   build-depends:       base >= 4.7 && < 5
+                     , pipes-protolude >= 0.1
+                     , pipes-attoparsec >= 0.5
+                     , attoparsec >= 0.13
+                     , text >= 1.2
+                     , lens >= 4.13
+                     , singletons
+                     , vinyl
   default-language:    Haskell2010
-
-executable siphon
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N -02
-  build-depends:       base
-                     , siphon
-  default-language:    Haskell2010
+  default-extensions:  NoImplicitPrelude
+                     , OverloadedStrings
+                     , RankNTypes
+                     , DeriveFunctor
+                     , GADTs
+                     , PolyKinds
+                     , DataKinds
+                     , ScopedTypeVariables
+                     , TypeFamilies
 
 test-suite siphon-test
   type:                exitcode-stdio-1.0
@@ -33,6 +43,7 @@ test-suite siphon-test
   main-is:             Spec.hs
   build-depends:       base
                      , siphon
+                     , pipes-protolude >= 0.1
   ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 

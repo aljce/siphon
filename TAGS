@@ -1,0 +1,59 @@
+
+./Setup.hs,15
+main main1,2
+
+./test/Spec.hs,30
+main main0,1
+main main1,2
+
+./src/Siphon/Types.hs,320
+module Siphon.Types Siphon.Types0,1
+data Cell Cell4,5
+data Cell a = Content Content4,5
+data Cell a = Content a | Newline Newline4,5
+newtype Parsing Parsing6,7
+newtype Parsing s a = Parsing Parsing6,7
+newtype Parsing s a = Parsing { getParsing getParsing6,7
+dataPath dataPath8,9
+dataPath2 dataPath29,10
+
+./src/Siphon/Test.hs,631
+module Siphon.Test Siphon.Test1,2
+data Fields Fields17,18
+data Fields = Name Name17,18
+data Fields = Name | Age Age17,18
+data Fields = Name | Age | Sleeping Sleeping17,18
+type LifeForm LifeForm19,20
+type family family21,22
+type family ElF ElF21,22
+newtype Attr Attr26,27
+newtype Attr f = Attr Attr26,27
+newtype Attr f = Attr { unAttr unAttr26,27
+instance instance28,29
+lf lf34,35
+lf lf35,36
+fromFields fromFields37,38
+fromFields fromFields38,39
+toFields toFields42,43
+toFields toFields43,44
+liftErrors liftErrors49,50
+liftErrors liftErrors50,51
+testing testing58,59
+testing testing59,60
+
+./src/Siphon/Parser.hs,392
+module Siphon.Parser Siphon.Parser0,1
+parseCell parseCell16,17
+parseCsv parseCsv24,25
+parseLine parseLine26,27
+parseLine parseLine27,28
+getLines getLines30,31
+getLines getLines31,32
+parseCsvFile parseCsvFile33,34
+parseCsvFile parseCsvFile34,35
+toCell toCell38,39
+toCell toCell41,42
+fromCell fromCell63,64
+fromCell fromCell65,66
+test5 test575,76
+test5 test576,77
