@@ -60,7 +60,6 @@ toCell trans tags = do
             Newline -> return (throwError "Not enough input")
 
 
-
 fromCell :: forall (xs :: [k]) f t m a. (Monad m) =>
            (forall (x :: k). Sing x -> f x -> t) -> SList xs -> Pipe (Rec f xs) (Cell t) m a
 fromCell trans tags = do
