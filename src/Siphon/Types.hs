@@ -29,6 +29,10 @@ newtype Encoding content a = Encoding { getEncoding :: a -> content }
 newtype Decoding content a = Decoding { getDecoding :: content -> Either String a }
   deriving (Functor)
 
+instance Applicative (Decoding content) where
+  pure a = Decoding (const (Right a))
+  Decoding f <*> Decoding g = Decoding $ \content -> f content <*> g content
+
 instance Contravariant (Encoding content) where
   contramap f (Encoding go) = Encoding (go . f)
 
@@ -64,6 +68,9 @@ instance ContravariantConst1 f => Contravariant (Headed f content) where
 instance FunctorConst1 f => Functor (Headed f content) where
   fmap g (Headed header codec) = Headed header (fmapConst1 g codec)
 
+-- instance Applicative (Headed f content) where
+--   pure 
+
 instance Contravariant (Column content) where
   contramap g (Column h c) = Column h (c . g)
 
@@ -71,6 +78,12 @@ instance Contravariant (Column content) where
 --   us a 'Contravariant' instance.
 newtype Many f a = Many {getMany :: V.Vector (f a)}
   deriving (Monoid,Functor,Traversable,Foldable)
+
+-- newtype Grouped f a = Grouped  {getGrouped :: f a -> }
+
+-- alpha :: Many (Headed Decoding Text) Int 
+--       -> Many (Headed Decoding Text) Char
+--       -> Many (Headed Decoding Text) (Int,Char)
 
 instance MFunctor Many where
   hoist f (Many v) = Many (V.map f v)

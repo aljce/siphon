@@ -11,6 +11,9 @@ import Data.Attoparsec.Text hiding (take)
 import qualified Data.Text as T
 
 import Control.Lens (view)
+import Control.Applicative.Free
+import qualified Control.Applicative.Free as Ap
+import qualified Data.Vector as V
 
 import Siphon.Types
 
@@ -71,6 +74,21 @@ fromCell trans tags = do
         go (field :& restR) (SCons singS restS) = do
           yield (Content (trans singS field))
           go restR restS
+
+analyzeDecoding :: forall content a.
+     Ap (Decoding content) a 
+  -> V.Vector content
+  -> Either String a
+analyzeDecoding a v = go 0 a
+  where
+  go :: forall b. Int -> Ap (Decoding content) b -> Either String b
+  go _   (Ap.Pure x) = Right x
+  go !ix (Ap (Decoding f) apNext) = case v V.!? ix of
+    Nothing -> Left "ran out of cells"
+    Just content -> do
+      a <- f content
+      g <- go (ix + 1) apNext
+      Right (g a)
 
 test5 :: IO ()
 test5 = do

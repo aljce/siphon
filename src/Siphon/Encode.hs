@@ -44,9 +44,9 @@ recs render sings = forever $ do
   yieldRec render sings record
   yield Newline
 
--- cells :: Pipe (Cell t) t m a
--- cells = forever $ do
---   await 
+-- analyzeEncoding :: Ap (Encoding content) a -> a -> [content]
+-- analyzeEncoding (Ap.Pure _) _ = []
+-- analyzeEncoding (Ap (Encoding f) apNext) a = 
 
 -- | Includes a newline at the end.
 yieldRow :: Monad m => Many (Encoding t) d -> d -> Producer' (Cell t) m ()
