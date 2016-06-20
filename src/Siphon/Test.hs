@@ -17,18 +17,18 @@ import Siphon.Types
 
 data Fields = Name | Age | Sleeping deriving Show
 
-type LifeForm = [Name,Age,Sleeping]
+type LifeForm = '[ 'Name,'Age,'Sleeping]
 
 type family ElF (f :: Fields) :: * where
-  ElF Name = String
-  ElF Age  = Int
-  ElF Sleeping = Bool
+  ElF 'Name = String
+  ElF 'Age  = Int
+  ElF 'Sleeping = Bool
 
 newtype Attr f = Attr { unAttr :: ElF f }
 
-instance Show (Attr Name) where show (Attr x) = "name: " <> show x
-instance Show (Attr Age) where show (Attr x) = "age: " <> show x
-instance Show (Attr Sleeping) where show (Attr x) = "sleeping: " <> show x
+instance Show (Attr 'Name) where show (Attr x) = "name: " <> show x
+instance Show (Attr 'Age) where show (Attr x) = "age: " <> show x
+instance Show (Attr 'Sleeping) where show (Attr x) = "sleeping: " <> show x
 
 genSingletons [ ''Fields ]
 

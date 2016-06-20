@@ -37,7 +37,12 @@ resolver: lts-6.2
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - '.'
-- '../pipes-protolude'
+- location:
+    git: 'https://github.com/mckeankylej/pipes-protolude'
+    commit: '4daa355a7d17fe96e3a6ace399b709ec28b256a8'
+  extra-dep: true
+
+# - '../pipes-protolude'
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []

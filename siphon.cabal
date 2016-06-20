@@ -1,5 +1,5 @@
 name:                siphon
-version:             0.1.0.0
+version:             0.1.3
 synopsis:            CSV Parsing
 description:         Please see README.md
 homepage:            https://github.com/mckeankylej/siphon#readme
@@ -15,37 +15,54 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   ghc-options:         -Wall
-  exposed-modules:     Siphon.Types
-                     , Siphon.Parser
-                     , Siphon.Test
-                     , Siphon.Encode
-  build-depends:       base >= 4.7 && < 5
-                     , pipes-protolude >= 0.1
-                     , pipes-attoparsec >= 0.5
-                     , attoparsec >= 0.13
-                     , text >= 1.2
-                     , lens >= 4.13
-                     , singletons
-                     , vinyl
+  exposed-modules:   
+      Siphon.Types
+    , Siphon.Parser
+    , Siphon.Test
+    , Siphon.Encode
+    , Siphon.Cell.Text
+    , Siphon.Encode.Text
+    , Siphon.Decode
+    , Siphon.Misc
+  build-depends:       
+      base >= 4.7 && < 5
+    , pipes-protolude >= 0.1
+    , pipes-attoparsec >= 0.5
+    , attoparsec >= 0.13
+    , text >= 1.2
+    , lens >= 4.13
+    , singletons
+    , vinyl
+    , contravariant
+    , semigroups
+    , vector
+    , profunctors
+    , mmorph
+    , free
   default-language:    Haskell2010
-  default-extensions:  NoImplicitPrelude
-                     , LambdaCase
-                     , OverloadedStrings
-                     , RankNTypes
-                     , DeriveFunctor
-                     , GADTs
-                     , PolyKinds
-                     , DataKinds
-                     , ScopedTypeVariables
-                     , TypeFamilies
+  default-extensions:  
+      NoImplicitPrelude
+    , LambdaCase
+    , OverloadedStrings
+    , RankNTypes
+    , DeriveFunctor
+    , DeriveTraversable
+    , GADTs
+    , PolyKinds
+    , DataKinds
+    , ScopedTypeVariables
+    , TypeFamilies
+    , BangPatterns
+    , GeneralizedNewtypeDeriving
 
 test-suite siphon-test
   type:                exitcode-stdio-1.0
   hs-source-dirs:      test
   main-is:             Spec.hs
-  build-depends:       base
-                     , siphon
-                     , pipes-protolude >= 0.1
+  build-depends:       
+      base
+    , siphon
+    , pipes-protolude >= 0.1
   ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
   default-language:    Haskell2010
 
